@@ -1,0 +1,17 @@
+# 开发环境：兼容当前 IDEA 和 Windows 用户环境变量。
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+sky:
+  alioss:
+    enabled: ${OSS_ENABLED:true}
+    endpoint: ${OSS_ENDPOINT:https://oss-cn-beijing.aliyuncs.com}
+    region: ${OSS_REGION:cn-beijing}
+    bucket-name: ${OSS_BUCKET_NAME:skytakeout-brad}
+    access-key-id: ${OSS_ACCESS_KEY_ID:}
+    access-key-secret: ${OSS_ACCESS_KEY_SECRET:}
+  jwt:
+    admin-secret-key: ${SKY_JWT_ADMIN_SECRET_KEY}

@@ -1,0 +1,17 @@
+# 生产环境：使用独立变量，不回退到开发环境连接和凭证。
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+sky:
+  alioss:
+    enabled: ${PROD_OSS_ENABLED:true}
+    endpoint: ${PROD_OSS_ENDPOINT:}
+    region: ${PROD_OSS_REGION:}
+    bucket-name: ${PROD_OSS_BUCKET_NAME:}
+    access-key-id: ${PROD_OSS_ACCESS_KEY_ID:}
+    access-key-secret: ${PROD_OSS_ACCESS_KEY_SECRET:}
+  jwt:
+    admin-secret-key: ${PROD_SKY_JWT_ADMIN_SECRET_KEY}
