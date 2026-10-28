@@ -1,14 +1,13 @@
 spring:
   application:
     name: sky-server
+  profiles:
+    default: dev
   datasource:
-   url: ${DB_URL}
-   username: ${DB_USERNAME}
-   password: ${DB_PASSWORD}
-   driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
 
 mybatis:
   mapper-locations: classpath*:mapper/**/*.xml
@@ -23,6 +22,5 @@ pagehelper:
 
 sky:
   jwt:
-    admin-secret-key: ${SKY_JWT_ADMIN_SECRET_KEY}
     admin-ttl: 7200000 # 毫秒，默认两小时
     admin-token-name: token

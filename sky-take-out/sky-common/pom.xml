@@ -18,6 +18,11 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>3.18.4</version>
+        </dependency>
+        <dependency>
             <groupId>com.brad</groupId>
             <artifactId>sky-pojo</artifactId>
             <version>1.0-SNAPSHOT</version>

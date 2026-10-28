@@ -1,6 +1,6 @@
 # 管理端登录与认证
 
-启动前设置环境变量 SKY_JWT_ADMIN_SECRET_KEY，值为随机生成、至少 32 字节的密钥；请保持密钥稳定，否则已有令牌失效。数据库连接从环境变量 DB_URL、DB_USERNAME、DB_PASSWORD 读取，不提供硬编码默认值。
+启动前设置环境变量 SKY_JWT_ADMIN_SECRET_KEY，值为随机生成、至少 32 字节的密钥；请保持密钥稳定，否则已有令牌失效。默认 dev 环境的数据库连接从环境变量 DB_URL、DB_USERNAME、DB_PASSWORD 读取，不提供硬编码默认值。生产环境使用独立的 PROD_ 变量，切换方式见 [环境配置说明](PROFILES.md)。
 
 在 IDEA「运行 → 编辑配置 → 环境变量」中设置以上变量，以及 SKY_JWT_ADMIN_SECRET_KEY。DB_URL 填写完整 JDBC URL（包含所需连接参数），例如 jdbc:mysql://localhost:3306/sky_take_out?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai；DB_USERNAME 和 DB_PASSWORD 填写实际数据库账号和密码。保存运行配置时不要将包含凭据的配置共享或提交到 Git。
 

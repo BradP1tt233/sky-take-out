@@ -50,6 +50,17 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(DuplicateKeyException.class)
     public ResponseEntity<Result> duplicate(DuplicateKeyException exception) {
-        return ResponseEntity.status(409).body(Result.error("用户名已存在"));
+        String message = "数据已存在，请勿重复添加";
+        String detail = exception.getMostSpecificCause().getMessage();
+        if (detail != null) {
+            if (detail.contains("uk_dish_name")) {
+                message = "菜品名称已存在";
+            } else if (detail.contains("uk_employee_username")) {
+                message = "用户名已存在";
+            } else if (detail.contains("uk_category_name")) {
+                message = "分类名称已存在";
+            }
+        }
+        return ResponseEntity.status(409).body(Result.error(message));
     }
 }
