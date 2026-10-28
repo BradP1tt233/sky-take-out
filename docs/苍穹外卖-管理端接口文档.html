@@ -1,0 +1,1381 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>苍穹外卖 · 管理端接口文档</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#243247;background:#f5f7fb;font:15px/1.8 "Microsoft YaHei",system-ui,sans-serif}aside{position:fixed;width:240px;height:100vh;padding:30px 22px;background:#12243a;color:white;overflow:auto}aside strong{font-size:21px}aside p{color:#a8bed4}aside a{display:block;color:#d8e5f2;text-decoration:none;padding:9px 0}small{float:right;color:#8faac6}main{max-width:1250px;margin-left:240px;padding:40px 55px 90px}h1{font-size:32px;color:#102c49}h2{margin-top:55px;border-bottom:2px solid #cbd9e8;padding-bottom:12px}h3{margin-top:38px;color:#095782}h4{margin-bottom:12px}table{border-collapse:collapse;width:100%;background:white;font-size:14px;display:block;overflow:auto;margin:18px 0 25px}th,td{padding:10px 14px;border:1px solid #dce4ef;text-align:left;vertical-align:top}th{background:#e9f0f8;white-space:nowrap}a{color:#087aa3}code{font-family:Consolas,monospace;background:#eaf0f7;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}pre{padding:18px 22px;background:#14273d;color:#e6eef8;border-radius:8px;overflow:auto;line-height:1.6}pre code{background:transparent;padding:0;color:inherit}li{margin:8px 0}a[id]{scroll-margin-top:20px}@media(max-width:850px){aside{position:static;width:auto;height:auto}aside a{display:inline-block;margin-right:20px}main{margin:0;padding:20px}}@media print{aside{display:none}main{margin:0;padding:0}body{background:white}pre{white-space:pre-wrap;background:#f2f4f7;color:black}h3{break-after:avoid}tr{break-inside:avoid}a{color:inherit}}
+</style><aside><strong>苍穹外卖</strong><p>管理端接口文档<br>9 个模块 · 47 个接口</p><a href="#module-1">分类相关接口 <small>6</small></a><a href="#module-2">员工相关接口 <small>8</small></a><a href="#module-3">套餐相关接口 <small>6</small></a><a href="#module-4">工作台接口 <small>4</small></a><a href="#module-5">店铺操作接口 <small>2</small></a><a href="#module-6">数据统计相关接口 <small>5</small></a><a href="#module-7">菜品相关接口 <small>7</small></a><a href="#module-8">订单管理接口 <small>8</small></a><a href="#module-9">通用接口 <small>1</small></a></aside><main><h1>苍穹外卖 · 管理端接口文档</h1>
+<p>根据 <code>苍穹外卖-管理端接口.json</code> 整理 · 9 个模块 · 47 个接口 · 整理日期：2026-10-22</p>
+<h2>阅读说明</h2>
+<ul><li>本文仅依据所提供 JSON，未对运行中的服务进行验证。接口名称、路径、字段说明和必填标记均按原始定义保留。</li><li>服务域名、端口及部署前缀未提供；请求示例以 <code>{{baseUrl}}</code> 作为占位。</li><li>登录响应包含 JWT 令牌 <code>data.token</code>，但原文件未说明令牌的请求头名称、格式、有效期及哪些接口需鉴权。</li><li>“未标必填”表示原文件没有将该字段列为必填，并不保证服务端允许省略。嵌套字段的必填约束作用于其所在对象；路径参数必须提供。</li><li>Query 参数未注明类型时不推断类型；日期、状态、金额单位及批量参数规则以各接口原始说明为准，未注明项需联调确认。</li><li>JSON 示例由 Schema 自动生成，仅演示结构；<code>0</code>、<code>string</code> 等为占位值，不代表成功状态码或可提交的业务值。示例包含可选字段。</li><li>原文件的接口状态均为 <code>undone</code>，不代表接口已实现或已验收。未提供 HTTP 状态码、完整业务错误码、权限及错误响应约定。</li></ul>
+<h2>通用响应结构</h2>
+<p>大多数 JSON 响应包含以下字段，具体类型及嵌套结构见各接口。</p>
+<table><thead><tr><th>字段</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>整数；具体成功/失败取值原文件未提供</td></tr><tr><td><code>data</code></td><td>业务数据；类型随接口变化</td></tr><tr><td><code>msg</code></td><td>字符串；原文件未给出统一语义约定</td></tr></tbody></table>
+<h2>接口目录</h2>
+<table><thead><tr><th>模块</th><th>数量</th><th>跳转</th></tr></thead><tbody><tr><td>分类相关接口</td><td>6</td><td><a href="#module-1">查看</a></td></tr><tr><td>员工相关接口</td><td>8</td><td><a href="#module-2">查看</a></td></tr><tr><td>套餐相关接口</td><td>6</td><td><a href="#module-3">查看</a></td></tr><tr><td>工作台接口</td><td>4</td><td><a href="#module-4">查看</a></td></tr><tr><td>店铺操作接口</td><td>2</td><td><a href="#module-5">查看</a></td></tr><tr><td>数据统计相关接口</td><td>5</td><td><a href="#module-6">查看</a></td></tr><tr><td>菜品相关接口</td><td>7</td><td><a href="#module-7">查看</a></td></tr><tr><td>订单管理接口</td><td>8</td><td><a href="#module-8">查看</a></td></tr><tr><td>通用接口</td><td>1</td><td><a href="#module-9">查看</a></td></tr></tbody></table>
+<a id="module-1"></a>
+<h2>1. 分类相关接口</h2>
+<table><thead><tr><th>编号</th><th>接口</th><th>方法</th><th>路径</th></tr></thead><tbody><tr><td>1.1</td><td><a href="#api-1-1">修改分类</a></td><td>PUT</td><td><code>/admin/category</code></td></tr><tr><td>1.2</td><td><a href="#api-1-2">分类分页查询</a></td><td>GET</td><td><code>/admin/category/page</code></td></tr><tr><td>1.3</td><td><a href="#api-1-3">启用、禁用分类</a></td><td>POST</td><td><code>/admin/category/status/{status}</code></td></tr><tr><td>1.4</td><td><a href="#api-1-4">新增分类</a></td><td>POST</td><td><code>/admin/category</code></td></tr><tr><td>1.5</td><td><a href="#api-1-5">根据id删除分类</a></td><td>DELETE</td><td><code>/admin/category</code></td></tr><tr><td>1.6</td><td><a href="#api-1-6">根据类型查询分类</a></td><td>GET</td><td><code>/admin/category/list</code></td></tr></tbody></table>
+<a id="api-1-1"></a>
+<h3>1.1 修改分类</h3>
+<p><strong>PUT</strong> <code>/admin/category</code></p>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>格式：<code>application/json</code>。</p>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>id</code></td><td>integer (int64)</td><td>是</td><td>分类id</td></tr><tr><td><code>name</code></td><td>string</td><td>是</td><td>分类名称</td></tr><tr><td><code>sort</code></td><td>integer (int32)</td><td>是</td><td>排序</td></tr><tr><td><code>type</code></td><td>integer (int32)</td><td>是</td><td>分类类型</td></tr></tbody></table>
+<pre><code>{
+  &quot;id&quot;: 0,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;sort&quot;: 0,
+  &quot;type&quot;: 0
+}</code></pre>
+<h4>请求示例</h4>
+<pre><code>PUT {{baseUrl}}/admin/category
+Content-Type: application/json
+
+{
+  &quot;id&quot;: 0,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;sort&quot;: 0,
+  &quot;type&quot;: 0
+}</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: &quot;string&quot;,
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-1-2"></a>
+<h3>1.2 分类分页查询</h3>
+<p><strong>GET</strong> <code>/admin/category/page</code></p>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>name</code></td><td>未注明</td><td>未标必填</td><td>分类名称</td><td>传统主食</td></tr><tr><td><code>page</code></td><td>未注明</td><td>是</td><td>页码</td><td>1</td></tr><tr><td><code>pageSize</code></td><td>未注明</td><td>是</td><td>每页记录数</td><td>10</td></tr><tr><td><code>type</code></td><td>未注明</td><td>未标必填</td><td>分类类型：1为菜品分类，2为套餐分类</td><td>1</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/category/page?name=%E4%BC%A0%E7%BB%9F%E4%B8%BB%E9%A3%9F&amp;page=1&amp;pageSize=10&amp;type=1</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>number</td><td>是</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>null</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>是</td><td>未注明</td></tr><tr><td><code>data.total</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records</code></td><td>array&lt;object&gt;</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].id</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].type</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].name</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].sort</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].status</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].createTime</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].updateTime</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].createUser</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].updateUser</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;msg&quot;: &quot;string&quot;,
+  &quot;data&quot;: {
+    &quot;total&quot;: 0,
+    &quot;records&quot;: [
+      {
+        &quot;id&quot;: 0,
+        &quot;type&quot;: 0,
+        &quot;name&quot;: &quot;string&quot;,
+        &quot;sort&quot;: 0,
+        &quot;status&quot;: 0,
+        &quot;createTime&quot;: &quot;string&quot;,
+        &quot;updateTime&quot;: &quot;string&quot;,
+        &quot;createUser&quot;: 0,
+        &quot;updateUser&quot;: 0
+      }
+    ]
+  }
+}</code></pre>
+<a id="api-1-3"></a>
+<h3>1.3 启用、禁用分类</h3>
+<p><strong>POST</strong> <code>/admin/category/status/{status}</code></p>
+<h4>路径参数</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>status</code></td><td>未注明</td><td>是</td><td>1为启用，0为禁用</td><td>1</td></tr></tbody></table>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>id</code></td><td>未注明</td><td>是</td><td>分类id</td><td>100</td></tr></tbody></table>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>POST {{baseUrl}}/admin/category/status/1?id=100</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: &quot;string&quot;,
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-1-4"></a>
+<h3>1.4 新增分类</h3>
+<p><strong>POST</strong> <code>/admin/category</code></p>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>格式：<code>application/json</code>。</p>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>id</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>name</code></td><td>string</td><td>是</td><td>分类名称</td></tr><tr><td><code>sort</code></td><td>integer (int32)</td><td>是</td><td>排序，按照升序排序</td></tr><tr><td><code>type</code></td><td>integer (int32)</td><td>是</td><td>分类类型：1为菜品分类，2为套餐分类</td></tr></tbody></table>
+<pre><code>{
+  &quot;id&quot;: 0,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;sort&quot;: 0,
+  &quot;type&quot;: 0
+}</code></pre>
+<h4>请求示例</h4>
+<pre><code>POST {{baseUrl}}/admin/category
+Content-Type: application/json
+
+{
+  &quot;id&quot;: 0,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;sort&quot;: 0,
+  &quot;type&quot;: 0
+}</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: &quot;string&quot;,
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-1-5"></a>
+<h3>1.5 根据id删除分类</h3>
+<p><strong>DELETE</strong> <code>/admin/category</code></p>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>id</code></td><td>未注明</td><td>是</td><td>分类id</td><td>100</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>DELETE {{baseUrl}}/admin/category?id=100</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: &quot;string&quot;,
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-1-6"></a>
+<h3>1.6 根据类型查询分类</h3>
+<p><strong>GET</strong> <code>/admin/category/list</code></p>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>type</code></td><td>未注明</td><td>未标必填</td><td>分类类型：1为菜品分类，2为套餐分类</td><td>2</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/category/list?type=2</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>array&lt;object&gt;</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].createTime</code></td><td>string (date-time)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].createUser</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].id</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].name</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].sort</code></td><td>integer (int32)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].status</code></td><td>integer (int32)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].type</code></td><td>integer (int32)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].updateTime</code></td><td>string (date-time)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].updateUser</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: [
+    {
+      &quot;createTime&quot;: &quot;2026-10-22T12:00:00&quot;,
+      &quot;createUser&quot;: 0,
+      &quot;id&quot;: 0,
+      &quot;name&quot;: &quot;string&quot;,
+      &quot;sort&quot;: 0,
+      &quot;status&quot;: 0,
+      &quot;type&quot;: 0,
+      &quot;updateTime&quot;: &quot;2026-10-22T12:00:00&quot;,
+      &quot;updateUser&quot;: 0
+    }
+  ],
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="module-2"></a>
+<h2>2. 员工相关接口</h2>
+<table><thead><tr><th>编号</th><th>接口</th><th>方法</th><th>路径</th></tr></thead><tbody><tr><td>2.1</td><td><a href="#api-2-1">修改密码</a></td><td>PUT</td><td><code>/admin/employee/editPassword</code></td></tr><tr><td>2.2</td><td><a href="#api-2-2">启用、禁用员工账号</a></td><td>POST</td><td><code>/admin/employee/status/{status}</code></td></tr><tr><td>2.3</td><td><a href="#api-2-3">员工分页查询</a></td><td>GET</td><td><code>/admin/employee/page</code></td></tr><tr><td>2.4</td><td><a href="#api-2-4">员工登录</a></td><td>POST</td><td><code>/admin/employee/login</code></td></tr><tr><td>2.5</td><td><a href="#api-2-5">新增员工</a></td><td>POST</td><td><code>/admin/employee</code></td></tr><tr><td>2.6</td><td><a href="#api-2-6">根据id查询员工</a></td><td>GET</td><td><code>/admin/employee/{id}</code></td></tr><tr><td>2.7</td><td><a href="#api-2-7">编辑员工信息</a></td><td>PUT</td><td><code>/admin/employee</code></td></tr><tr><td>2.8</td><td><a href="#api-2-8">退出登录</a></td><td>POST</td><td><code>/admin/employee/logout</code></td></tr></tbody></table>
+<a id="api-2-1"></a>
+<h3>2.1 修改密码</h3>
+<p><strong>PUT</strong> <code>/admin/employee/editPassword</code></p>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>格式：<code>application/json</code>。</p>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>empId</code></td><td>integer (int64)</td><td>是</td><td>员工id</td></tr><tr><td><code>newPassword</code></td><td>string</td><td>是</td><td>新密码</td></tr><tr><td><code>oldPassword</code></td><td>string</td><td>是</td><td>旧密码</td></tr></tbody></table>
+<pre><code>{
+  &quot;empId&quot;: 0,
+  &quot;newPassword&quot;: &quot;string&quot;,
+  &quot;oldPassword&quot;: &quot;string&quot;
+}</code></pre>
+<h4>请求示例</h4>
+<pre><code>PUT {{baseUrl}}/admin/employee/editPassword
+Content-Type: application/json
+
+{
+  &quot;empId&quot;: 0,
+  &quot;newPassword&quot;: &quot;string&quot;,
+  &quot;oldPassword&quot;: &quot;string&quot;
+}</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: &quot;string&quot;,
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-2-2"></a>
+<h3>2.2 启用、禁用员工账号</h3>
+<p><strong>POST</strong> <code>/admin/employee/status/{status}</code></p>
+<h4>路径参数</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>status</code></td><td>未注明</td><td>是</td><td>状态，1为启用 0为禁用</td><td>1</td></tr></tbody></table>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>id</code></td><td>未注明</td><td>是</td><td>员工id</td><td>—</td></tr></tbody></table>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>POST {{baseUrl}}/admin/employee/status/1?id=VALUE</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: &quot;string&quot;,
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-2-3"></a>
+<h3>2.3 员工分页查询</h3>
+<p><strong>GET</strong> <code>/admin/employee/page</code></p>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>name</code></td><td>未注明</td><td>未标必填</td><td>员工姓名</td><td>张三</td></tr><tr><td><code>page</code></td><td>未注明</td><td>是</td><td>页码</td><td>1</td></tr><tr><td><code>pageSize</code></td><td>未注明</td><td>是</td><td>每页记录数</td><td>10</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/employee/page?name=%E5%BC%A0%E4%B8%89&amp;page=1&amp;pageSize=10</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>number</td><td>是</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>null</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>是</td><td>未注明</td></tr><tr><td><code>data.total</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records</code></td><td>array&lt;object&gt;</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].id</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].username</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].name</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].password</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].phone</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].sex</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].idNumber</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].status</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].createTime</code></td><td>[&#x27;string&#x27;, &#x27;null&#x27;]</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].updateTime</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].createUser</code></td><td>[&#x27;number&#x27;, &#x27;null&#x27;]</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].updateUser</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;msg&quot;: &quot;string&quot;,
+  &quot;data&quot;: {
+    &quot;total&quot;: 0,
+    &quot;records&quot;: [
+      {
+        &quot;id&quot;: 0,
+        &quot;username&quot;: &quot;string&quot;,
+        &quot;name&quot;: &quot;string&quot;,
+        &quot;password&quot;: &quot;string&quot;,
+        &quot;phone&quot;: &quot;string&quot;,
+        &quot;sex&quot;: &quot;string&quot;,
+        &quot;idNumber&quot;: &quot;string&quot;,
+        &quot;status&quot;: 0,
+        &quot;createTime&quot;: &quot;string&quot;,
+        &quot;updateTime&quot;: &quot;string&quot;,
+        &quot;createUser&quot;: &quot;string&quot;,
+        &quot;updateUser&quot;: 0
+      }
+    ]
+  }
+}</code></pre>
+<a id="api-2-4"></a>
+<h3>2.4 员工登录</h3>
+<p><strong>POST</strong> <code>/admin/employee/login</code></p>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>格式：<code>application/json</code>。</p>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>password</code></td><td>string</td><td>是</td><td>密码</td></tr><tr><td><code>username</code></td><td>string</td><td>是</td><td>用户名</td></tr></tbody></table>
+<pre><code>{
+  &quot;password&quot;: &quot;string&quot;,
+  &quot;username&quot;: &quot;string&quot;
+}</code></pre>
+<h4>请求示例</h4>
+<pre><code>POST {{baseUrl}}/admin/employee/login
+Content-Type: application/json
+
+{
+  &quot;password&quot;: &quot;string&quot;,
+  &quot;username&quot;: &quot;string&quot;
+}</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>未标必填</td><td>员工登录返回的数据格式</td></tr><tr><td><code>data.id</code></td><td>integer (int64)</td><td>未标必填</td><td>主键值</td></tr><tr><td><code>data.name</code></td><td>string</td><td>未标必填</td><td>姓名</td></tr><tr><td><code>data.token</code></td><td>string</td><td>未标必填</td><td>jwt令牌</td></tr><tr><td><code>data.userName</code></td><td>string</td><td>未标必填</td><td>用户名</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {
+    &quot;id&quot;: 0,
+    &quot;name&quot;: &quot;string&quot;,
+    &quot;token&quot;: &quot;string&quot;,
+    &quot;userName&quot;: &quot;string&quot;
+  },
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-2-5"></a>
+<h3>2.5 新增员工</h3>
+<p><strong>POST</strong> <code>/admin/employee</code></p>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>格式：<code>application/json</code>。</p>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>id</code></td><td>integer (int64)</td><td>未标必填</td><td>员工id</td></tr><tr><td><code>idNumber</code></td><td>string</td><td>是</td><td>身份证</td></tr><tr><td><code>name</code></td><td>string</td><td>是</td><td>姓名</td></tr><tr><td><code>phone</code></td><td>string</td><td>是</td><td>手机号</td></tr><tr><td><code>sex</code></td><td>string</td><td>是</td><td>性别</td></tr><tr><td><code>username</code></td><td>string</td><td>是</td><td>用户名</td></tr></tbody></table>
+<pre><code>{
+  &quot;id&quot;: 0,
+  &quot;idNumber&quot;: &quot;string&quot;,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;phone&quot;: &quot;string&quot;,
+  &quot;sex&quot;: &quot;string&quot;,
+  &quot;username&quot;: &quot;string&quot;
+}</code></pre>
+<h4>请求示例</h4>
+<pre><code>POST {{baseUrl}}/admin/employee
+Content-Type: application/json
+
+{
+  &quot;id&quot;: 0,
+  &quot;idNumber&quot;: &quot;string&quot;,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;phone&quot;: &quot;string&quot;,
+  &quot;sex&quot;: &quot;string&quot;,
+  &quot;username&quot;: &quot;string&quot;
+}</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {},
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-2-6"></a>
+<h3>2.6 根据id查询员工</h3>
+<p><strong>GET</strong> <code>/admin/employee/{id}</code></p>
+<h4>路径参数</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>id</code></td><td>未注明</td><td>是</td><td>员工id</td><td>100</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/employee/100</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>是</td><td>未注明</td></tr><tr><td><code>data.createTime</code></td><td>string (date-time)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.createUser</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.id</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.idNumber</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.name</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.password</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.phone</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.sex</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.status</code></td><td>integer (int32)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.updateTime</code></td><td>string (date-time)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.updateUser</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.username</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {
+    &quot;createTime&quot;: &quot;2026-10-22T12:00:00&quot;,
+    &quot;createUser&quot;: 0,
+    &quot;id&quot;: 0,
+    &quot;idNumber&quot;: &quot;string&quot;,
+    &quot;name&quot;: &quot;string&quot;,
+    &quot;password&quot;: &quot;string&quot;,
+    &quot;phone&quot;: &quot;string&quot;,
+    &quot;sex&quot;: &quot;string&quot;,
+    &quot;status&quot;: 0,
+    &quot;updateTime&quot;: &quot;2026-10-22T12:00:00&quot;,
+    &quot;updateUser&quot;: 0,
+    &quot;username&quot;: &quot;string&quot;
+  },
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-2-7"></a>
+<h3>2.7 编辑员工信息</h3>
+<p><strong>PUT</strong> <code>/admin/employee</code></p>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>格式：<code>application/json</code>。</p>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>id</code></td><td>integer (int64)</td><td>是</td><td>未注明</td></tr><tr><td><code>idNumber</code></td><td>string</td><td>是</td><td>未注明</td></tr><tr><td><code>name</code></td><td>string</td><td>是</td><td>未注明</td></tr><tr><td><code>phone</code></td><td>string</td><td>是</td><td>未注明</td></tr><tr><td><code>sex</code></td><td>string</td><td>是</td><td>未注明</td></tr><tr><td><code>username</code></td><td>string</td><td>是</td><td>未注明</td></tr></tbody></table>
+<pre><code>{
+  &quot;id&quot;: 0,
+  &quot;idNumber&quot;: &quot;string&quot;,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;phone&quot;: &quot;string&quot;,
+  &quot;sex&quot;: &quot;string&quot;,
+  &quot;username&quot;: &quot;string&quot;
+}</code></pre>
+<h4>请求示例</h4>
+<pre><code>PUT {{baseUrl}}/admin/employee
+Content-Type: application/json
+
+{
+  &quot;id&quot;: 0,
+  &quot;idNumber&quot;: &quot;string&quot;,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;phone&quot;: &quot;string&quot;,
+  &quot;sex&quot;: &quot;string&quot;,
+  &quot;username&quot;: &quot;string&quot;
+}</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: &quot;string&quot;,
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-2-8"></a>
+<h3>2.8 退出登录</h3>
+<p><strong>POST</strong> <code>/admin/employee/logout</code></p>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>格式：<code>application/json</code>。</p>
+<pre><code>{}</code></pre>
+<h4>请求示例</h4>
+<pre><code>POST {{baseUrl}}/admin/employee/logout
+Content-Type: application/json
+
+{}</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: &quot;string&quot;,
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="module-3"></a>
+<h2>3. 套餐相关接口</h2>
+<table><thead><tr><th>编号</th><th>接口</th><th>方法</th><th>路径</th></tr></thead><tbody><tr><td>3.1</td><td><a href="#api-3-1">修改套餐</a></td><td>PUT</td><td><code>/admin/setmeal</code></td></tr><tr><td>3.2</td><td><a href="#api-3-2">分页查询</a></td><td>GET</td><td><code>/admin/setmeal/page</code></td></tr><tr><td>3.3</td><td><a href="#api-3-3">套餐起售、停售</a></td><td>POST</td><td><code>/admin/setmeal/status/{status}</code></td></tr><tr><td>3.4</td><td><a href="#api-3-4">批量删除套餐</a></td><td>DELETE</td><td><code>/admin/setmeal</code></td></tr><tr><td>3.5</td><td><a href="#api-3-5">新增套餐</a></td><td>POST</td><td><code>/admin/setmeal</code></td></tr><tr><td>3.6</td><td><a href="#api-3-6">根据id查询套餐</a></td><td>GET</td><td><code>/admin/setmeal/{id}</code></td></tr></tbody></table>
+<a id="api-3-1"></a>
+<h3>3.1 修改套餐</h3>
+<p><strong>PUT</strong> <code>/admin/setmeal</code></p>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>格式：<code>application/json</code>。</p>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>categoryId</code></td><td>integer (int64)</td><td>是</td><td>分类id</td></tr><tr><td><code>description</code></td><td>string</td><td>未标必填</td><td>套餐描述</td></tr><tr><td><code>id</code></td><td>integer (int64)</td><td>是</td><td>套餐id</td></tr><tr><td><code>image</code></td><td>string</td><td>是</td><td>套餐图片路径</td></tr><tr><td><code>name</code></td><td>string</td><td>是</td><td>套餐名称</td></tr><tr><td><code>price</code></td><td>number</td><td>是</td><td>套餐价格</td></tr><tr><td><code>setmealDishes</code></td><td>array&lt;object&gt;</td><td>是</td><td>套餐和菜品关联关系</td></tr><tr><td><code>setmealDishes[].copies</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>菜品份数</td></tr><tr><td><code>setmealDishes[].dishId</code></td><td>integer (int64)</td><td>父对象存在时必填</td><td>菜品id</td></tr><tr><td><code>setmealDishes[].id</code></td><td>integer (int64)</td><td>未标必填</td><td>关系表主键值</td></tr><tr><td><code>setmealDishes[].name</code></td><td>string</td><td>父对象存在时必填</td><td>菜品名称</td></tr><tr><td><code>setmealDishes[].price</code></td><td>number</td><td>父对象存在时必填</td><td>菜品价格</td></tr><tr><td><code>setmealDishes[].setmealId</code></td><td>integer (int64)</td><td>未标必填</td><td>套餐id</td></tr><tr><td><code>status</code></td><td>integer (int32)</td><td>未标必填</td><td>套餐起售状态</td></tr></tbody></table>
+<pre><code>{
+  &quot;categoryId&quot;: 0,
+  &quot;description&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;image&quot;: &quot;string&quot;,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;price&quot;: 0,
+  &quot;setmealDishes&quot;: [
+    {
+      &quot;copies&quot;: 0,
+      &quot;dishId&quot;: 0,
+      &quot;id&quot;: 0,
+      &quot;name&quot;: &quot;string&quot;,
+      &quot;price&quot;: 0,
+      &quot;setmealId&quot;: 0
+    }
+  ],
+  &quot;status&quot;: 0
+}</code></pre>
+<h4>请求示例</h4>
+<pre><code>PUT {{baseUrl}}/admin/setmeal
+Content-Type: application/json
+
+{
+  &quot;categoryId&quot;: 0,
+  &quot;description&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;image&quot;: &quot;string&quot;,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;price&quot;: 0,
+  &quot;setmealDishes&quot;: [
+    {
+      &quot;copies&quot;: 0,
+      &quot;dishId&quot;: 0,
+      &quot;id&quot;: 0,
+      &quot;name&quot;: &quot;string&quot;,
+      &quot;price&quot;: 0,
+      &quot;setmealId&quot;: 0
+    }
+  ],
+  &quot;status&quot;: 0
+}</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>是</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {},
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-3-2"></a>
+<h3>3.2 分页查询</h3>
+<p><strong>GET</strong> <code>/admin/setmeal/page</code></p>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>categoryId</code></td><td>未注明</td><td>未标必填</td><td>分类id</td><td>—</td></tr><tr><td><code>name</code></td><td>未注明</td><td>未标必填</td><td>套餐名称</td><td>—</td></tr><tr><td><code>page</code></td><td>未注明</td><td>是</td><td>页码</td><td>—</td></tr><tr><td><code>pageSize</code></td><td>未注明</td><td>是</td><td>每页记录数</td><td>—</td></tr><tr><td><code>status</code></td><td>未注明</td><td>未标必填</td><td>套餐起售状态</td><td>—</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/setmeal/page?page=VALUE&amp;pageSize=VALUE</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>number</td><td>是</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>null</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.total</code></td><td>number</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.records</code></td><td>array&lt;object&gt;</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.records[].id</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].categoryId</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].name</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].price</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].status</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].description</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].image</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].updateTime</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].categoryName</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;msg&quot;: &quot;string&quot;,
+  &quot;data&quot;: {
+    &quot;total&quot;: 0,
+    &quot;records&quot;: [
+      {
+        &quot;id&quot;: 0,
+        &quot;categoryId&quot;: 0,
+        &quot;name&quot;: &quot;string&quot;,
+        &quot;price&quot;: 0,
+        &quot;status&quot;: 0,
+        &quot;description&quot;: &quot;string&quot;,
+        &quot;image&quot;: &quot;string&quot;,
+        &quot;updateTime&quot;: &quot;string&quot;,
+        &quot;categoryName&quot;: &quot;string&quot;
+      }
+    ]
+  }
+}</code></pre>
+<a id="api-3-3"></a>
+<h3>3.3 套餐起售、停售</h3>
+<p><strong>POST</strong> <code>/admin/setmeal/status/{status}</code></p>
+<h4>路径参数</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>status</code></td><td>未注明</td><td>是</td><td>套餐状态，1表示起售，0表示停售</td><td>1</td></tr></tbody></table>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>id</code></td><td>未注明</td><td>是</td><td>套餐id</td><td>101</td></tr></tbody></table>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>POST {{baseUrl}}/admin/setmeal/status/1?id=101</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {},
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-3-4"></a>
+<h3>3.4 批量删除套餐</h3>
+<p><strong>DELETE</strong> <code>/admin/setmeal</code></p>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>ids</code></td><td>未注明</td><td>是</td><td>ids</td><td>—</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>DELETE {{baseUrl}}/admin/setmeal?ids=VALUE</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {},
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<p>备注：<code>ids</code> 的批量编码格式在原文件中未注明。</p>
+<a id="api-3-5"></a>
+<h3>3.5 新增套餐</h3>
+<p><strong>POST</strong> <code>/admin/setmeal</code></p>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>格式：<code>application/json</code>。</p>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>categoryId</code></td><td>integer (int64)</td><td>是</td><td>分类id</td></tr><tr><td><code>description</code></td><td>string</td><td>未标必填</td><td>套餐描述</td></tr><tr><td><code>id</code></td><td>integer (int64)</td><td>未标必填</td><td>套餐id</td></tr><tr><td><code>image</code></td><td>string</td><td>是</td><td>套餐图片</td></tr><tr><td><code>name</code></td><td>string</td><td>是</td><td>套餐名称</td></tr><tr><td><code>price</code></td><td>number</td><td>是</td><td>套餐价格</td></tr><tr><td><code>setmealDishes</code></td><td>array&lt;object&gt;</td><td>是</td><td>套餐包含的菜品</td></tr><tr><td><code>setmealDishes[].copies</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>份数</td></tr><tr><td><code>setmealDishes[].dishId</code></td><td>integer (int64)</td><td>父对象存在时必填</td><td>菜品id</td></tr><tr><td><code>setmealDishes[].id</code></td><td>integer (int64)</td><td>未标必填</td><td>套餐和菜品关系id</td></tr><tr><td><code>setmealDishes[].name</code></td><td>string</td><td>父对象存在时必填</td><td>菜品名称</td></tr><tr><td><code>setmealDishes[].price</code></td><td>number</td><td>父对象存在时必填</td><td>菜品价格</td></tr><tr><td><code>setmealDishes[].setmealId</code></td><td>integer (int64)</td><td>父对象存在时必填</td><td>套餐id</td></tr><tr><td><code>status</code></td><td>integer (int32)</td><td>是</td><td>套餐状态：1位起售 0为停售</td></tr></tbody></table>
+<pre><code>{
+  &quot;categoryId&quot;: 0,
+  &quot;description&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;image&quot;: &quot;string&quot;,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;price&quot;: 0,
+  &quot;setmealDishes&quot;: [
+    {
+      &quot;copies&quot;: 0,
+      &quot;dishId&quot;: 0,
+      &quot;id&quot;: 0,
+      &quot;name&quot;: &quot;string&quot;,
+      &quot;price&quot;: 0,
+      &quot;setmealId&quot;: 0
+    }
+  ],
+  &quot;status&quot;: 0
+}</code></pre>
+<h4>请求示例</h4>
+<pre><code>POST {{baseUrl}}/admin/setmeal
+Content-Type: application/json
+
+{
+  &quot;categoryId&quot;: 0,
+  &quot;description&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;image&quot;: &quot;string&quot;,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;price&quot;: 0,
+  &quot;setmealDishes&quot;: [
+    {
+      &quot;copies&quot;: 0,
+      &quot;dishId&quot;: 0,
+      &quot;id&quot;: 0,
+      &quot;name&quot;: &quot;string&quot;,
+      &quot;price&quot;: 0,
+      &quot;setmealId&quot;: 0
+    }
+  ],
+  &quot;status&quot;: 0
+}</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {},
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-3-6"></a>
+<h3>3.6 根据id查询套餐</h3>
+<p><strong>GET</strong> <code>/admin/setmeal/{id}</code></p>
+<h4>路径参数</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>id</code></td><td>未注明</td><td>是</td><td>套餐id</td><td>101</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/setmeal/101</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>是</td><td>未注明</td></tr><tr><td><code>data.categoryId</code></td><td>integer (int64)</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.categoryName</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.description</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.id</code></td><td>integer (int64)</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.image</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.name</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.price</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.setmealDishes</code></td><td>array&lt;object&gt;</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.setmealDishes[].copies</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.setmealDishes[].dishId</code></td><td>integer (int64)</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.setmealDishes[].id</code></td><td>integer (int64)</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.setmealDishes[].name</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.setmealDishes[].price</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.setmealDishes[].setmealId</code></td><td>integer (int64)</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.status</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.updateTime</code></td><td>string (date-time)</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {
+    &quot;categoryId&quot;: 0,
+    &quot;categoryName&quot;: &quot;string&quot;,
+    &quot;description&quot;: &quot;string&quot;,
+    &quot;id&quot;: 0,
+    &quot;image&quot;: &quot;string&quot;,
+    &quot;name&quot;: &quot;string&quot;,
+    &quot;price&quot;: 0,
+    &quot;setmealDishes&quot;: [
+      {
+        &quot;copies&quot;: 0,
+        &quot;dishId&quot;: 0,
+        &quot;id&quot;: 0,
+        &quot;name&quot;: &quot;string&quot;,
+        &quot;price&quot;: 0,
+        &quot;setmealId&quot;: 0
+      }
+    ],
+    &quot;status&quot;: 0,
+    &quot;updateTime&quot;: &quot;2026-10-22T12:00:00&quot;
+  },
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="module-4"></a>
+<h2>4. 工作台接口</h2>
+<table><thead><tr><th>编号</th><th>接口</th><th>方法</th><th>路径</th></tr></thead><tbody><tr><td>4.1</td><td><a href="#api-4-1">查询今日运营数据</a></td><td>GET</td><td><code>/admin/workspace/businessData</code></td></tr><tr><td>4.2</td><td><a href="#api-4-2">查询套餐总览</a></td><td>GET</td><td><code>/admin/workspace/overviewSetmeals</code></td></tr><tr><td>4.3</td><td><a href="#api-4-3">查询菜品总览</a></td><td>GET</td><td><code>/admin/workspace/overviewDishes</code></td></tr><tr><td>4.4</td><td><a href="#api-4-4">查询订单管理数据</a></td><td>GET</td><td><code>/admin/workspace/overviewOrders</code></td></tr></tbody></table>
+<a id="api-4-1"></a>
+<h3>4.1 查询今日运营数据</h3>
+<p><strong>GET</strong> <code>/admin/workspace/businessData</code></p>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/workspace/businessData</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>是</td><td>未注明</td></tr><tr><td><code>data.newUsers</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>新增用户数</td></tr><tr><td><code>data.orderCompletionRate</code></td><td>number (double)</td><td>父对象存在时必填</td><td>订单完成率</td></tr><tr><td><code>data.turnover</code></td><td>number (double)</td><td>父对象存在时必填</td><td>营业额</td></tr><tr><td><code>data.unitPrice</code></td><td>number (double)</td><td>父对象存在时必填</td><td>平均客单价</td></tr><tr><td><code>data.validOrderCount</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>有效订单数</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {
+    &quot;newUsers&quot;: 0,
+    &quot;orderCompletionRate&quot;: 0,
+    &quot;turnover&quot;: 0,
+    &quot;unitPrice&quot;: 0,
+    &quot;validOrderCount&quot;: 0
+  },
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-4-2"></a>
+<h3>4.2 查询套餐总览</h3>
+<p><strong>GET</strong> <code>/admin/workspace/overviewSetmeals</code></p>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/workspace/overviewSetmeals</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>是</td><td>未注明</td></tr><tr><td><code>data.discontinued</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>已停售套餐数量</td></tr><tr><td><code>data.sold</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>已启售套餐数量</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {
+    &quot;discontinued&quot;: 0,
+    &quot;sold&quot;: 0
+  },
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-4-3"></a>
+<h3>4.3 查询菜品总览</h3>
+<p><strong>GET</strong> <code>/admin/workspace/overviewDishes</code></p>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/workspace/overviewDishes</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>是</td><td>未注明</td></tr><tr><td><code>data.discontinued</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>已停售菜品数量</td></tr><tr><td><code>data.sold</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>已启售菜品数量</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {
+    &quot;discontinued&quot;: 0,
+    &quot;sold&quot;: 0
+  },
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-4-4"></a>
+<h3>4.4 查询订单管理数据</h3>
+<p><strong>GET</strong> <code>/admin/workspace/overviewOrders</code></p>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/workspace/overviewOrders</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>是</td><td>未注明</td></tr><tr><td><code>data.allOrders</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>全部订单</td></tr><tr><td><code>data.cancelledOrders</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>已取消数量</td></tr><tr><td><code>data.completedOrders</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>已完成数量</td></tr><tr><td><code>data.deliveredOrders</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>待派送数量</td></tr><tr><td><code>data.waitingOrders</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>待接单数量</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {
+    &quot;allOrders&quot;: 0,
+    &quot;cancelledOrders&quot;: 0,
+    &quot;completedOrders&quot;: 0,
+    &quot;deliveredOrders&quot;: 0,
+    &quot;waitingOrders&quot;: 0
+  },
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="module-5"></a>
+<h2>5. 店铺操作接口</h2>
+<table><thead><tr><th>编号</th><th>接口</th><th>方法</th><th>路径</th></tr></thead><tbody><tr><td>5.1</td><td><a href="#api-5-1">获取营业状态</a></td><td>GET</td><td><code>/admin/shop/status</code></td></tr><tr><td>5.2</td><td><a href="#api-5-2">设置营业状态</a></td><td>PUT</td><td><code>/admin/shop/{status}</code></td></tr></tbody></table>
+<a id="api-5-1"></a>
+<h3>5.1 获取营业状态</h3>
+<p><strong>GET</strong> <code>/admin/shop/status</code></p>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/shop/status</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>integer (int32)</td><td>是</td><td>店铺营业状态：1为营业，0为打烊</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: 0,
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-5-2"></a>
+<h3>5.2 设置营业状态</h3>
+<p><strong>PUT</strong> <code>/admin/shop/{status}</code></p>
+<h4>路径参数</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>status</code></td><td>未注明</td><td>是</td><td>店铺营业状态：1为营业，0为打烊</td><td>1</td></tr></tbody></table>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>PUT {{baseUrl}}/admin/shop/1</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: &quot;string&quot;,
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="module-6"></a>
+<h2>6. 数据统计相关接口</h2>
+<table><thead><tr><th>编号</th><th>接口</th><th>方法</th><th>路径</th></tr></thead><tbody><tr><td>6.1</td><td><a href="#api-6-1">导出Excel报表接口</a></td><td>GET</td><td><code>/admin/report/export</code></td></tr><tr><td>6.2</td><td><a href="#api-6-2">查询销量排名top10接口</a></td><td>GET</td><td><code>/admin/report/top10</code></td></tr><tr><td>6.3</td><td><a href="#api-6-3">用户统计接口</a></td><td>GET</td><td><code>/admin/report/userStatistics</code></td></tr><tr><td>6.4</td><td><a href="#api-6-4">营业额统计接口</a></td><td>GET</td><td><code>/admin/report/turnoverStatistics</code></td></tr><tr><td>6.5</td><td><a href="#api-6-5">订单统计接口</a></td><td>GET</td><td><code>/admin/report/ordersStatistics</code></td></tr></tbody></table>
+<a id="api-6-1"></a>
+<h3>6.1 导出Excel报表接口</h3>
+<p><strong>GET</strong> <code>/admin/report/export</code></p>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/report/export</code></pre>
+<h4>响应字段</h4>
+<p>原始响应类型：<code>raw</code>。</p>
+<pre><code>OK</code></pre>
+<p>原文件仅提供 <code>OK</code>，未提供 Excel 文件流、文件名或响应头定义，实际下载行为需联调确认。</p>
+<a id="api-6-2"></a>
+<h3>6.2 查询销量排名top10接口</h3>
+<p><strong>GET</strong> <code>/admin/report/top10</code></p>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>begin</code></td><td>未注明</td><td>是</td><td>开始日期</td><td>2022-05-01</td></tr><tr><td><code>end</code></td><td>未注明</td><td>是</td><td>结束日期</td><td>2022-05-31</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/report/top10?begin=2022-05-01&amp;end=2022-05-31</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>是</td><td>未注明</td></tr><tr><td><code>data.nameList</code></td><td>string</td><td>父对象存在时必填</td><td>商品名称列表，以逗号分隔</td></tr><tr><td><code>data.numberList</code></td><td>string</td><td>父对象存在时必填</td><td>销量列表，以逗号分隔</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {
+    &quot;nameList&quot;: &quot;string&quot;,
+    &quot;numberList&quot;: &quot;string&quot;
+  },
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-6-3"></a>
+<h3>6.3 用户统计接口</h3>
+<p><strong>GET</strong> <code>/admin/report/userStatistics</code></p>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>begin</code></td><td>未注明</td><td>是</td><td>开始日期</td><td>2022-05-01</td></tr><tr><td><code>end</code></td><td>未注明</td><td>是</td><td>结束日期</td><td>2022-05-31</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/report/userStatistics?begin=2022-05-01&amp;end=2022-05-31</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>是</td><td>未注明</td></tr><tr><td><code>data.dateList</code></td><td>string</td><td>父对象存在时必填</td><td>日期列表，以逗号分隔</td></tr><tr><td><code>data.newUserList</code></td><td>string</td><td>父对象存在时必填</td><td>新增用户数列表，以逗号分隔</td></tr><tr><td><code>data.totalUserList</code></td><td>string</td><td>父对象存在时必填</td><td>总用户量列表，以逗号分隔</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {
+    &quot;dateList&quot;: &quot;string&quot;,
+    &quot;newUserList&quot;: &quot;string&quot;,
+    &quot;totalUserList&quot;: &quot;string&quot;
+  },
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-6-4"></a>
+<h3>6.4 营业额统计接口</h3>
+<p><strong>GET</strong> <code>/admin/report/turnoverStatistics</code></p>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>begin</code></td><td>未注明</td><td>是</td><td>开始日期</td><td>2022-05-01</td></tr><tr><td><code>end</code></td><td>未注明</td><td>是</td><td>结束日期</td><td>2022-05-31</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/report/turnoverStatistics?begin=2022-05-01&amp;end=2022-05-31</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>是</td><td>未注明</td></tr><tr><td><code>data.dateList</code></td><td>string</td><td>父对象存在时必填</td><td>日期列表，日期之间以逗号分隔</td></tr><tr><td><code>data.turnoverList</code></td><td>string</td><td>父对象存在时必填</td><td>营业额列表，营业额之间以逗号分隔</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {
+    &quot;dateList&quot;: &quot;string&quot;,
+    &quot;turnoverList&quot;: &quot;string&quot;
+  },
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-6-5"></a>
+<h3>6.5 订单统计接口</h3>
+<p><strong>GET</strong> <code>/admin/report/ordersStatistics</code></p>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>begin</code></td><td>未注明</td><td>是</td><td>开始日期</td><td>2022-05-01</td></tr><tr><td><code>end</code></td><td>未注明</td><td>是</td><td>结束日期</td><td>2022-05-31</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/report/ordersStatistics?begin=2022-05-01&amp;end=2022-05-31</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>是</td><td>未注明</td></tr><tr><td><code>data.dateList</code></td><td>string</td><td>父对象存在时必填</td><td>日期列表，以逗号分隔</td></tr><tr><td><code>data.orderCompletionRate</code></td><td>number (double)</td><td>父对象存在时必填</td><td>订单完成率</td></tr><tr><td><code>data.orderCountList</code></td><td>string</td><td>父对象存在时必填</td><td>订单数列表，以逗号分隔</td></tr><tr><td><code>data.totalOrderCount</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>订单总数</td></tr><tr><td><code>data.validOrderCount</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>有效订单数</td></tr><tr><td><code>data.validOrderCountList</code></td><td>string</td><td>父对象存在时必填</td><td>有效订单数列表，以逗号分隔</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {
+    &quot;dateList&quot;: &quot;string&quot;,
+    &quot;orderCompletionRate&quot;: 0,
+    &quot;orderCountList&quot;: &quot;string&quot;,
+    &quot;totalOrderCount&quot;: 0,
+    &quot;validOrderCount&quot;: 0,
+    &quot;validOrderCountList&quot;: &quot;string&quot;
+  },
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="module-7"></a>
+<h2>7. 菜品相关接口</h2>
+<table><thead><tr><th>编号</th><th>接口</th><th>方法</th><th>路径</th></tr></thead><tbody><tr><td>7.1</td><td><a href="#api-7-1">修改菜品</a></td><td>PUT</td><td><code>/admin/dish</code></td></tr><tr><td>7.2</td><td><a href="#api-7-2">批量删除菜品</a></td><td>DELETE</td><td><code>/admin/dish</code></td></tr><tr><td>7.3</td><td><a href="#api-7-3">新增菜品</a></td><td>POST</td><td><code>/admin/dish</code></td></tr><tr><td>7.4</td><td><a href="#api-7-4">根据id查询菜品</a></td><td>GET</td><td><code>/admin/dish/{id}</code></td></tr><tr><td>7.5</td><td><a href="#api-7-5">根据分类id查询菜品</a></td><td>GET</td><td><code>/admin/dish/list</code></td></tr><tr><td>7.6</td><td><a href="#api-7-6">菜品分页查询</a></td><td>GET</td><td><code>/admin/dish/page</code></td></tr><tr><td>7.7</td><td><a href="#api-7-7">菜品起售、停售</a></td><td>POST</td><td><code>/admin/dish/status/{status}</code></td></tr></tbody></table>
+<a id="api-7-1"></a>
+<h3>7.1 修改菜品</h3>
+<p><strong>PUT</strong> <code>/admin/dish</code></p>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>格式：<code>application/json</code>。</p>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>categoryId</code></td><td>integer (int64)</td><td>是</td><td>未注明</td></tr><tr><td><code>description</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>flavors</code></td><td>array&lt;object&gt;</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>flavors[].dishId</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>flavors[].id</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>flavors[].name</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>flavors[].value</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>id</code></td><td>integer (int64)</td><td>是</td><td>未注明</td></tr><tr><td><code>image</code></td><td>string</td><td>是</td><td>未注明</td></tr><tr><td><code>name</code></td><td>string</td><td>是</td><td>未注明</td></tr><tr><td><code>price</code></td><td>number</td><td>是</td><td>未注明</td></tr><tr><td><code>status</code></td><td>integer (int32)</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<pre><code>{
+  &quot;categoryId&quot;: 0,
+  &quot;description&quot;: &quot;string&quot;,
+  &quot;flavors&quot;: [
+    {
+      &quot;dishId&quot;: 0,
+      &quot;id&quot;: 0,
+      &quot;name&quot;: &quot;string&quot;,
+      &quot;value&quot;: &quot;string&quot;
+    }
+  ],
+  &quot;id&quot;: 0,
+  &quot;image&quot;: &quot;string&quot;,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;price&quot;: 0,
+  &quot;status&quot;: 0
+}</code></pre>
+<h4>请求示例</h4>
+<pre><code>PUT {{baseUrl}}/admin/dish
+Content-Type: application/json
+
+{
+  &quot;categoryId&quot;: 0,
+  &quot;description&quot;: &quot;string&quot;,
+  &quot;flavors&quot;: [
+    {
+      &quot;dishId&quot;: 0,
+      &quot;id&quot;: 0,
+      &quot;name&quot;: &quot;string&quot;,
+      &quot;value&quot;: &quot;string&quot;
+    }
+  ],
+  &quot;id&quot;: 0,
+  &quot;image&quot;: &quot;string&quot;,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;price&quot;: 0,
+  &quot;status&quot;: 0
+}</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: &quot;string&quot;,
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-7-2"></a>
+<h3>7.2 批量删除菜品</h3>
+<p><strong>DELETE</strong> <code>/admin/dish</code></p>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>ids</code></td><td>未注明</td><td>是</td><td>菜品id，之间用逗号分隔</td><td>1,2,3</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>DELETE {{baseUrl}}/admin/dish?ids=1,2,3</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: &quot;string&quot;,
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-7-3"></a>
+<h3>7.3 新增菜品</h3>
+<p><strong>POST</strong> <code>/admin/dish</code></p>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>格式：<code>application/json</code>。</p>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>categoryId</code></td><td>integer (int64)</td><td>是</td><td>分类id</td></tr><tr><td><code>description</code></td><td>string</td><td>未标必填</td><td>菜品描述</td></tr><tr><td><code>flavors</code></td><td>array&lt;object&gt;</td><td>未标必填</td><td>口味</td></tr><tr><td><code>flavors[].dishId</code></td><td>integer (int64)</td><td>未标必填</td><td>菜品id</td></tr><tr><td><code>flavors[].id</code></td><td>integer (int64)</td><td>未标必填</td><td>口味id</td></tr><tr><td><code>flavors[].name</code></td><td>string</td><td>父对象存在时必填</td><td>口味名称</td></tr><tr><td><code>flavors[].value</code></td><td>string</td><td>父对象存在时必填</td><td>口味值</td></tr><tr><td><code>id</code></td><td>integer (int64)</td><td>未标必填</td><td>菜品id</td></tr><tr><td><code>image</code></td><td>string</td><td>是</td><td>菜品图片路径</td></tr><tr><td><code>name</code></td><td>string</td><td>是</td><td>菜品名称</td></tr><tr><td><code>price</code></td><td>number</td><td>是</td><td>菜品价格</td></tr><tr><td><code>status</code></td><td>integer (int32)</td><td>未标必填</td><td>菜品状态：1为起售，0为停售</td></tr></tbody></table>
+<pre><code>{
+  &quot;categoryId&quot;: 0,
+  &quot;description&quot;: &quot;string&quot;,
+  &quot;flavors&quot;: [
+    {
+      &quot;dishId&quot;: 0,
+      &quot;id&quot;: 0,
+      &quot;name&quot;: &quot;string&quot;,
+      &quot;value&quot;: &quot;string&quot;
+    }
+  ],
+  &quot;id&quot;: 0,
+  &quot;image&quot;: &quot;string&quot;,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;price&quot;: 0,
+  &quot;status&quot;: 0
+}</code></pre>
+<h4>请求示例</h4>
+<pre><code>POST {{baseUrl}}/admin/dish
+Content-Type: application/json
+
+{
+  &quot;categoryId&quot;: 0,
+  &quot;description&quot;: &quot;string&quot;,
+  &quot;flavors&quot;: [
+    {
+      &quot;dishId&quot;: 0,
+      &quot;id&quot;: 0,
+      &quot;name&quot;: &quot;string&quot;,
+      &quot;value&quot;: &quot;string&quot;
+    }
+  ],
+  &quot;id&quot;: 0,
+  &quot;image&quot;: &quot;string&quot;,
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;price&quot;: 0,
+  &quot;status&quot;: 0
+}</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: &quot;string&quot;,
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-7-4"></a>
+<h3>7.4 根据id查询菜品</h3>
+<p><strong>GET</strong> <code>/admin/dish/{id}</code></p>
+<h4>路径参数</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>id</code></td><td>未注明</td><td>是</td><td>菜品id</td><td>101</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/dish/101</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>是</td><td>未注明</td></tr><tr><td><code>data.categoryId</code></td><td>integer (int64)</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.categoryName</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.description</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.flavors</code></td><td>array&lt;object&gt;</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.flavors[].dishId</code></td><td>integer (int64)</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.flavors[].id</code></td><td>integer (int64)</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.flavors[].name</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.flavors[].value</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.id</code></td><td>integer (int64)</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.image</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.name</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.price</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.status</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.updateTime</code></td><td>string (date-time)</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {
+    &quot;categoryId&quot;: 0,
+    &quot;categoryName&quot;: &quot;string&quot;,
+    &quot;description&quot;: &quot;string&quot;,
+    &quot;flavors&quot;: [
+      {
+        &quot;dishId&quot;: 0,
+        &quot;id&quot;: 0,
+        &quot;name&quot;: &quot;string&quot;,
+        &quot;value&quot;: &quot;string&quot;
+      }
+    ],
+    &quot;id&quot;: 0,
+    &quot;image&quot;: &quot;string&quot;,
+    &quot;name&quot;: &quot;string&quot;,
+    &quot;price&quot;: 0,
+    &quot;status&quot;: 0,
+    &quot;updateTime&quot;: &quot;2026-10-22T12:00:00&quot;
+  },
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-7-5"></a>
+<h3>7.5 根据分类id查询菜品</h3>
+<p><strong>GET</strong> <code>/admin/dish/list</code></p>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>categoryId</code></td><td>未注明</td><td>是</td><td>分类id</td><td>101</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/dish/list?categoryId=101</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>array&lt;object&gt;</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].categoryId</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].createTime</code></td><td>string (date-time)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].createUser</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].description</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].id</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].image</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].name</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].price</code></td><td>number</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].status</code></td><td>integer (int32)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].updateTime</code></td><td>string (date-time)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data[].updateUser</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: [
+    {
+      &quot;categoryId&quot;: 0,
+      &quot;createTime&quot;: &quot;2026-10-22T12:00:00&quot;,
+      &quot;createUser&quot;: 0,
+      &quot;description&quot;: &quot;string&quot;,
+      &quot;id&quot;: 0,
+      &quot;image&quot;: &quot;string&quot;,
+      &quot;name&quot;: &quot;string&quot;,
+      &quot;price&quot;: 0,
+      &quot;status&quot;: 0,
+      &quot;updateTime&quot;: &quot;2026-10-22T12:00:00&quot;,
+      &quot;updateUser&quot;: 0
+    }
+  ],
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-7-6"></a>
+<h3>7.6 菜品分页查询</h3>
+<p><strong>GET</strong> <code>/admin/dish/page</code></p>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>categoryId</code></td><td>未注明</td><td>未标必填</td><td>分类id</td><td>101</td></tr><tr><td><code>name</code></td><td>未注明</td><td>未标必填</td><td>菜品名称</td><td>宫保鸡丁</td></tr><tr><td><code>page</code></td><td>未注明</td><td>是</td><td>页码</td><td>1</td></tr><tr><td><code>pageSize</code></td><td>未注明</td><td>是</td><td>每页记录数</td><td>10</td></tr><tr><td><code>status</code></td><td>未注明</td><td>未标必填</td><td>分类状态</td><td>1</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/dish/page?categoryId=101&amp;name=%E5%AE%AB%E4%BF%9D%E9%B8%A1%E4%B8%81&amp;page=1&amp;pageSize=10&amp;status=1</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>number</td><td>是</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>null</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.total</code></td><td>number</td><td>父对象存在时必填</td><td>总记录数</td></tr><tr><td><code>data.records</code></td><td>array&lt;object&gt;</td><td>父对象存在时必填</td><td>当前页数据</td></tr><tr><td><code>data.records[].id</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].name</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].categoryId</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].price</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].image</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].description</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].status</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].updateTime</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].categoryName</code></td><td>string</td><td>父对象存在时必填</td><td>分类名称</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;msg&quot;: &quot;string&quot;,
+  &quot;data&quot;: {
+    &quot;total&quot;: 0,
+    &quot;records&quot;: [
+      {
+        &quot;id&quot;: 0,
+        &quot;name&quot;: &quot;string&quot;,
+        &quot;categoryId&quot;: 0,
+        &quot;price&quot;: 0,
+        &quot;image&quot;: &quot;string&quot;,
+        &quot;description&quot;: &quot;string&quot;,
+        &quot;status&quot;: 0,
+        &quot;updateTime&quot;: &quot;string&quot;,
+        &quot;categoryName&quot;: &quot;string&quot;
+      }
+    ]
+  }
+}</code></pre>
+<a id="api-7-7"></a>
+<h3>7.7 菜品起售、停售</h3>
+<p><strong>POST</strong> <code>/admin/dish/status/{status}</code></p>
+<h4>路径参数</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>status</code></td><td>未注明</td><td>是</td><td>菜品状态：1为起售，0为停售</td><td>1</td></tr></tbody></table>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>id</code></td><td>未注明</td><td>是</td><td>菜品id</td><td>101</td></tr></tbody></table>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>POST {{baseUrl}}/admin/dish/status/1?id=101</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: &quot;string&quot;,
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="module-8"></a>
+<h2>8. 订单管理接口</h2>
+<table><thead><tr><th>编号</th><th>接口</th><th>方法</th><th>路径</th></tr></thead><tbody><tr><td>8.1</td><td><a href="#api-8-1">取消订单</a></td><td>PUT</td><td><code>/admin/order/cancel</code></td></tr><tr><td>8.2</td><td><a href="#api-8-2">各个状态的订单数量统计</a></td><td>GET</td><td><code>/admin/order/statistics</code></td></tr><tr><td>8.3</td><td><a href="#api-8-3">完成订单</a></td><td>PUT</td><td><code>/admin/order/complete/{id}</code></td></tr><tr><td>8.4</td><td><a href="#api-8-4">拒单</a></td><td>PUT</td><td><code>/admin/order/rejection</code></td></tr><tr><td>8.5</td><td><a href="#api-8-5">接单</a></td><td>PUT</td><td><code>/admin/order/confirm</code></td></tr><tr><td>8.6</td><td><a href="#api-8-6">查询订单详情</a></td><td>GET</td><td><code>/admin/order/details/{id}</code></td></tr><tr><td>8.7</td><td><a href="#api-8-7">派送订单</a></td><td>PUT</td><td><code>/admin/order/delivery/{id}</code></td></tr><tr><td>8.8</td><td><a href="#api-8-8">订单搜索</a></td><td>GET</td><td><code>/admin/order/conditionSearch</code></td></tr></tbody></table>
+<a id="api-8-1"></a>
+<h3>8.1 取消订单</h3>
+<p><strong>PUT</strong> <code>/admin/order/cancel</code></p>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>格式：<code>application/json</code>。</p>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>cancelReason</code></td><td>string</td><td>是</td><td>订单取消原因</td></tr><tr><td><code>id</code></td><td>integer (int64)</td><td>是</td><td>订单id</td></tr></tbody></table>
+<pre><code>{
+  &quot;cancelReason&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0
+}</code></pre>
+<h4>请求示例</h4>
+<pre><code>PUT {{baseUrl}}/admin/order/cancel
+Content-Type: application/json
+
+{
+  &quot;cancelReason&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0
+}</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {},
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-8-2"></a>
+<h3>8.2 各个状态的订单数量统计</h3>
+<p><strong>GET</strong> <code>/admin/order/statistics</code></p>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/order/statistics</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>是</td><td>未注明</td></tr><tr><td><code>data.confirmed</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>待派送数量</td></tr><tr><td><code>data.deliveryInProgress</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>派送中数量</td></tr><tr><td><code>data.toBeConfirmed</code></td><td>integer (int32)</td><td>父对象存在时必填</td><td>待接单数量</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {
+    &quot;confirmed&quot;: 0,
+    &quot;deliveryInProgress&quot;: 0,
+    &quot;toBeConfirmed&quot;: 0
+  },
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-8-3"></a>
+<h3>8.3 完成订单</h3>
+<p><strong>PUT</strong> <code>/admin/order/complete/{id}</code></p>
+<h4>路径参数</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>id</code></td><td>未注明</td><td>是</td><td>订单id</td><td>101</td></tr></tbody></table>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>PUT {{baseUrl}}/admin/order/complete/101</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {},
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-8-4"></a>
+<h3>8.4 拒单</h3>
+<p><strong>PUT</strong> <code>/admin/order/rejection</code></p>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>格式：<code>application/json</code>。</p>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>id</code></td><td>integer (int64)</td><td>是</td><td>订单id</td></tr><tr><td><code>rejectionReason</code></td><td>string</td><td>是</td><td>拒单原因</td></tr></tbody></table>
+<pre><code>{
+  &quot;id&quot;: 0,
+  &quot;rejectionReason&quot;: &quot;string&quot;
+}</code></pre>
+<h4>请求示例</h4>
+<pre><code>PUT {{baseUrl}}/admin/order/rejection
+Content-Type: application/json
+
+{
+  &quot;id&quot;: 0,
+  &quot;rejectionReason&quot;: &quot;string&quot;
+}</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {},
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-8-5"></a>
+<h3>8.5 接单</h3>
+<p><strong>PUT</strong> <code>/admin/order/confirm</code></p>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>application/json</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>格式：<code>application/json</code>。</p>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>id</code></td><td>integer (int64)</td><td>是</td><td>订单id</td></tr></tbody></table>
+<pre><code>{
+  &quot;id&quot;: 0
+}</code></pre>
+<h4>请求示例</h4>
+<pre><code>PUT {{baseUrl}}/admin/order/confirm
+Content-Type: application/json
+
+{
+  &quot;id&quot;: 0
+}</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {},
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-8-6"></a>
+<h3>8.6 查询订单详情</h3>
+<p><strong>GET</strong> <code>/admin/order/details/{id}</code></p>
+<h4>路径参数</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>id</code></td><td>未注明</td><td>是</td><td>订单id</td><td>101</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/order/details/101</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.address</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.addressBookId</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.amount</code></td><td>number</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.cancelReason</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.cancelTime</code></td><td>string (date-time)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.checkoutTime</code></td><td>string (date-time)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.consignee</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.deliveryStatus</code></td><td>integer (int32)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.deliveryTime</code></td><td>string (date-time)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.estimatedDeliveryTime</code></td><td>string (date-time)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.id</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.number</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.orderDetailList</code></td><td>array&lt;object&gt;</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.orderDetailList[].amount</code></td><td>number</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.orderDetailList[].dishFlavor</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.orderDetailList[].dishId</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.orderDetailList[].id</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.orderDetailList[].image</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.orderDetailList[].name</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.orderDetailList[].number</code></td><td>integer (int32)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.orderDetailList[].orderId</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.orderDetailList[].setmealId</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.orderDishes</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.orderTime</code></td><td>string (date-time)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.packAmount</code></td><td>integer (int32)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.payMethod</code></td><td>integer (int32)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.payStatus</code></td><td>integer (int32)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.phone</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.rejectionReason</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.remark</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.status</code></td><td>integer (int32)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.tablewareNumber</code></td><td>integer (int32)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.tablewareStatus</code></td><td>integer (int32)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.userId</code></td><td>integer (int64)</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.userName</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {
+    &quot;address&quot;: &quot;string&quot;,
+    &quot;addressBookId&quot;: 0,
+    &quot;amount&quot;: 0,
+    &quot;cancelReason&quot;: &quot;string&quot;,
+    &quot;cancelTime&quot;: &quot;2026-10-22T12:00:00&quot;,
+    &quot;checkoutTime&quot;: &quot;2026-10-22T12:00:00&quot;,
+    &quot;consignee&quot;: &quot;string&quot;,
+    &quot;deliveryStatus&quot;: 0,
+    &quot;deliveryTime&quot;: &quot;2026-10-22T12:00:00&quot;,
+    &quot;estimatedDeliveryTime&quot;: &quot;2026-10-22T12:00:00&quot;,
+    &quot;id&quot;: 0,
+    &quot;number&quot;: &quot;string&quot;,
+    &quot;orderDetailList&quot;: [
+      {
+        &quot;amount&quot;: 0,
+        &quot;dishFlavor&quot;: &quot;string&quot;,
+        &quot;dishId&quot;: 0,
+        &quot;id&quot;: 0,
+        &quot;image&quot;: &quot;string&quot;,
+        &quot;name&quot;: &quot;string&quot;,
+        &quot;number&quot;: 0,
+        &quot;orderId&quot;: 0,
+        &quot;setmealId&quot;: 0
+      }
+    ],
+    &quot;orderDishes&quot;: &quot;string&quot;,
+    &quot;orderTime&quot;: &quot;2026-10-22T12:00:00&quot;,
+    &quot;packAmount&quot;: 0,
+    &quot;payMethod&quot;: 0,
+    &quot;payStatus&quot;: 0,
+    &quot;phone&quot;: &quot;string&quot;,
+    &quot;rejectionReason&quot;: &quot;string&quot;,
+    &quot;remark&quot;: &quot;string&quot;,
+    &quot;status&quot;: 0,
+    &quot;tablewareNumber&quot;: 0,
+    &quot;tablewareStatus&quot;: 0,
+    &quot;userId&quot;: 0,
+    &quot;userName&quot;: &quot;string&quot;
+  },
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-8-7"></a>
+<h3>8.7 派送订单</h3>
+<p><strong>PUT</strong> <code>/admin/order/delivery/{id}</code></p>
+<h4>路径参数</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>id</code></td><td>未注明</td><td>是</td><td>订单id</td><td>101</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>PUT {{baseUrl}}/admin/order/delivery/101</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: {},
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre>
+<a id="api-8-8"></a>
+<h3>8.8 订单搜索</h3>
+<p><strong>GET</strong> <code>/admin/order/conditionSearch</code></p>
+<h4>查询参数（Query）</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>beginTime</code></td><td>未注明</td><td>未标必填</td><td>beginTime</td><td>—</td></tr><tr><td><code>endTime</code></td><td>未注明</td><td>未标必填</td><td>endTime</td><td>—</td></tr><tr><td><code>number</code></td><td>未注明</td><td>未标必填</td><td>number</td><td>—</td></tr><tr><td><code>page</code></td><td>未注明</td><td>是</td><td>page</td><td>—</td></tr><tr><td><code>pageSize</code></td><td>未注明</td><td>是</td><td>pageSize</td><td>—</td></tr><tr><td><code>phone</code></td><td>未注明</td><td>未标必填</td><td>phone</td><td>—</td></tr><tr><td><code>status</code></td><td>未注明</td><td>未标必填</td><td>status</td><td>—</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>原文件未定义请求体。</p>
+<h4>请求示例</h4>
+<pre><code>GET {{baseUrl}}/admin/order/conditionSearch?page=VALUE&amp;pageSize=VALUE</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>number</td><td>是</td><td>未注明</td></tr><tr><td><code>msg</code></td><td>null</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data</code></td><td>object</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.total</code></td><td>number</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.records</code></td><td>array&lt;object&gt;</td><td>未标必填</td><td>未注明</td></tr><tr><td><code>data.records[].id</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].number</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].status</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].userId</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].addressBookId</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].orderTime</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].checkoutTime</code></td><td>[&#x27;null&#x27;, &#x27;string&#x27;]</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].payMethod</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].payStatus</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].amount</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].remark</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].userName</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].phone</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].address</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].consignee</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].cancelReason</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].rejectionReason</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].cancelTime</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].estimatedDeliveryTime</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].deliveryStatus</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].deliveryTime</code></td><td>string</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].packAmount</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].tablewareNumber</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].tablewareStatus</code></td><td>number</td><td>父对象存在时必填</td><td>未注明</td></tr><tr><td><code>data.records[].orderDishes</code></td><td>string</td><td>父对象存在时必填</td><td>订单包含的菜品，以字符串形式展示</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;msg&quot;: &quot;string&quot;,
+  &quot;data&quot;: {
+    &quot;total&quot;: 0,
+    &quot;records&quot;: [
+      {
+        &quot;id&quot;: 0,
+        &quot;number&quot;: &quot;string&quot;,
+        &quot;status&quot;: 0,
+        &quot;userId&quot;: 0,
+        &quot;addressBookId&quot;: 0,
+        &quot;orderTime&quot;: &quot;string&quot;,
+        &quot;checkoutTime&quot;: &quot;string&quot;,
+        &quot;payMethod&quot;: 0,
+        &quot;payStatus&quot;: 0,
+        &quot;amount&quot;: 0,
+        &quot;remark&quot;: &quot;string&quot;,
+        &quot;userName&quot;: &quot;string&quot;,
+        &quot;phone&quot;: &quot;string&quot;,
+        &quot;address&quot;: &quot;string&quot;,
+        &quot;consignee&quot;: &quot;string&quot;,
+        &quot;cancelReason&quot;: &quot;string&quot;,
+        &quot;rejectionReason&quot;: &quot;string&quot;,
+        &quot;cancelTime&quot;: &quot;string&quot;,
+        &quot;estimatedDeliveryTime&quot;: &quot;string&quot;,
+        &quot;deliveryStatus&quot;: 0,
+        &quot;deliveryTime&quot;: &quot;string&quot;,
+        &quot;packAmount&quot;: 0,
+        &quot;tablewareNumber&quot;: 0,
+        &quot;tablewareStatus&quot;: 0,
+        &quot;orderDishes&quot;: &quot;string&quot;
+      }
+    ]
+  }
+}</code></pre>
+<a id="module-9"></a>
+<h2>9. 通用接口</h2>
+<table><thead><tr><th>编号</th><th>接口</th><th>方法</th><th>路径</th></tr></thead><tbody><tr><td>9.1</td><td><a href="#api-9-1">文件上传</a></td><td>POST</td><td><code>/admin/common/upload</code></td></tr></tbody></table>
+<a id="api-9-1"></a>
+<h3>9.1 文件上传</h3>
+<p><strong>POST</strong> <code>/admin/common/upload</code></p>
+<h4>请求头</h4>
+<table><thead><tr><th>参数</th><th>类型</th><th>必填</th><th>说明</th><th>原始示例 / 值</th></tr></thead><tbody><tr><td><code>Content-Type</code></td><td>未注明</td><td>是</td><td>未注明</td><td>multipart/form-data</td></tr></tbody></table>
+<h4>请求体</h4>
+<p>格式：<code>application/json</code>。</p>
+<pre><code>&quot;string&quot;</code></pre>
+<h4>请求示例</h4>
+<pre><code>POST {{baseUrl}}/admin/common/upload
+Content-Type: application/json
+
+&quot;string&quot;</code></pre>
+<h4>响应字段</h4>
+<table><thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead><tbody><tr><td><code>code</code></td><td>integer (int32)</td><td>是</td><td>未注明</td></tr><tr><td><code>data</code></td><td>string</td><td>是</td><td>文件上传路径</td></tr><tr><td><code>msg</code></td><td>string</td><td>未标必填</td><td>未注明</td></tr></tbody></table>
+<p>结构示例（占位值）：</p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;data&quot;: &quot;string&quot;,
+  &quot;msg&quot;: &quot;string&quot;
+}</code></pre></main></html>

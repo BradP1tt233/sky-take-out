@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: sky-server
+  datasource:
+   url: jdbc:mysql://127.0.0.1:3306/sky?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Hong_Kong
+   username: root
+   password: fF20070206
+   driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8080
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: false
+  page-size-zero: false
+
+sky:
+  jwt:
+    admin-secret-key: ${SKY_JWT_ADMIN_SECRET_KEY}
+    admin-ttl: 7200000 # 毫秒，默认两小时
+    admin-token-name: token
