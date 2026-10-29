@@ -1,10 +1,17 @@
 E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\dto\CategoryDTO.java
 E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\dto\CategoryPageQueryDTO.java
+E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\dto\DishDTO.java
+E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\dto\DishPageQueryDTO.java
 E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\dto\EmployeeDTO.java
 E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\dto\EmployeeLoginDTO.java
 E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\dto\EmployeePageQueryDTO.java
 E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\entity\Category.java
+E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\entity\Dish.java
+E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\entity\DishFlavor.java
 E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\entity\Employee.java
+E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\entity\Setmeal.java
+E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\entity\SetmealDish.java
 E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\valid\groups\Add.java
 E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\valid\groups\Update.java
+E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\vo\DishVO.java
 E:\develop\苍穹外卖\sky-take-out\sky-pojo\src\main\java\vo\EmployeeLoginVO.java

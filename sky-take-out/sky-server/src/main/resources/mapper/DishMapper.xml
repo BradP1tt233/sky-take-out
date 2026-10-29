@@ -11,4 +11,20 @@
             #{createTime}, #{updateTime}, #{createUser}, #{updateUser}
         )
     </insert>
+
+    <select id="pageQuery" resultType="vo.DishVO" >
+        SELECT d.* , c.name as categoryName FROM dish d LEFT OUTER JOIN category c on d.category_id = c.id
+        <where>
+            <if test="name != null">
+                and d.name like CONCAT ("%",#{name},"%")
+            </if>
+            <if test="categoryId != null">
+                and d.category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and d.status = #{status}
+            </if>
+        </where>
+        ORDER BY create_time desc
+    </select>
 </mapper>
